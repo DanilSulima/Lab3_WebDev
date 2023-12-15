@@ -1,5 +1,15 @@
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from rest_framework import serializers
+
+
+class CustomUser(AbstractUser):
+    def authenticate_user(self, username, password):
+        user = authenticate(username=username, password=password)
+        db_table = 'Users'
+        return user
+    pass
 
 
 class Instruments(models.Model):
